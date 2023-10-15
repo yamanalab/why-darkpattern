@@ -21,9 +21,8 @@ from transformers import (
 
 from configs.config import TrainConfig
 from const.path import DATASET_TSV_PATH, NN_MODEL_PICKLES_PATH
-from const.wandb import WANDB_PROJECT_NAME
 from utils.dataset import DarkpatternDataset
-from utils.notify import notify_slack
+from utils.notify import print
 from utils.random_seed import set_random_seed
 from utils.text import preprocess
 from utils.text import text_to_tensor as _text_to_tensor
@@ -49,7 +48,7 @@ def notify_error(
                     {e}
                 ```
                 """
-    notify_slack(text=text)
+    print(text)
 
 
 def custom_compute_metrics(res: EvalPrediction) -> dict:
@@ -117,7 +116,7 @@ def cross_validation(
         )
 
         training_args = TrainingArguments(
-            output_dir=NN_MODEL_PICKLES_PATH / experiment_id,
+            output_dir=NN_MODEL_PICKLES_PATH,
             logging_strategy="steps",
             save_total_limit=5,
             lr_scheduler_type="constant",
@@ -191,7 +190,7 @@ def cross_validation(
          roc_auc_score_average:{roc_auc_score_average}
     ```
     """
-    notify_slack(text)
+    print(text)
 
 
 @hydra.main(config_name="train_config")
@@ -206,28 +205,8 @@ def main(cfg: TrainConfig) -> None:
     max_len = cfg.max_len
     start_factor = cfg.start_factor
 
-    set_random_seed(cfg.random.seed)
+    set_random_seed(cfg.random_seed)
     experiment_id = generate_uuid()
-
-    config = {
-        "pretrained": pretrained,
-        "batch_size": batch_size,
-        "lr": learning_rate,
-        "max_length": max_len,
-        "gradient_accumulation_steps": gradient_accumulation_steps,
-        "dropout": dropout,
-        "epochs": epochs,
-        "start_factor": start_factor,
-    }
-
-    run = wandb.init(
-        project=WANDB_PROJECT_NAME,
-        config=config,
-        reinit=True,
-        name=experiment_id,
-    )
-
-    assert run is not None, "wandb.init() failed"
 
     cross_validation(
         n_fold=5,
@@ -241,8 +220,6 @@ def main(cfg: TrainConfig) -> None:
         start_factor=start_factor,
         experiment_id=experiment_id,
     )
-
-    run.finish()
 
 
 if __name__ == "__main__":

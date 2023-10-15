@@ -18,13 +18,26 @@ class TrainConfig:
 
 @dataclass
 class SHAPConfig:
-    random_seed: int = 42
     pretrained: str = "bert-base-uncased"
     max_length: int = 16
     preprocess: bool = False
     path_to_trained_model: str = ""
 
 
+@dataclass
+class LimeConfig:
+    random_seed: int = 42
+    pretrained: str = "roberta-large"
+    max_length: int = 16
+    num_features: int = 8
+    num_samples: int = 100
+    path_to_trained_model: str = ""
+
+
 cs = ConfigStore.instance()
 
 cs.store(name="train_config", node=TrainConfig)
+
+cs.store(name="lime_config", node=LimeConfig)
+
+cs.store(name="shap_config", node=SHAPConfig)
