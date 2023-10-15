@@ -95,8 +95,6 @@ def generate_explianability_by_lime(
         net = AutoModelForSequenceClassification.from_pretrained(
             pretrained, num_labels=top_labels
         ).to(device)
-        # model_name = format_model_filename(fold, pretrained)
-        # path_to_trained_model = dir_to_trained_model / model_name
         net.load_state_dict(torch.load(path_to_trained_models, map_location=device))
         net.eval()
 
@@ -107,7 +105,7 @@ def generate_explianability_by_lime(
 
         logging.info("Generate Explaination for Validation Data")
         logging.info(f"fold: {fold}, pretrained: {pretrained}")
-        for val_idx in val_idxes[:5]:
+        for val_idx in val_idxes:
             text, label = texts[val_idx], labels[val_idx]
             exp = explainer.explain_instance(
                 text,
@@ -130,7 +128,6 @@ def generate_explianability_by_lime(
             logging.info(f"True Label: {label}, Pred Label: {int(pred)}, ")
 
             logging.info(exp.as_list())
-        break
 
 
 @hydra.main(config_name="lime_config")
