@@ -8,7 +8,7 @@ DATASET_TSV_PATH = DATASET_PATH / "dataset.tsv"
 
 PICKLES_PATH = PROJECT_ROOT / "pickles"
 
-NN_MODEL_PICKLES_PATH = PICKLES_PATH / "models/nn"
+NN_MODEL_PICKLES_PATH = PICKLES_PATH / "models" / "nn"
 
 FIGURE_PATH = PROJECT_ROOT / "figures"
 

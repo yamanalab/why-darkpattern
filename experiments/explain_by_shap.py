@@ -10,7 +10,6 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer, pipe
 
 from configs.config import SHAPConfig
 from const.path import DATASET_TSV_PATH
-from utils.notify import notify_slack
 from utils.random_seed import set_random_seed
 from utils.text import preprocess_batch
 
@@ -70,11 +69,8 @@ def generate_explianability_by_shap(
         words[np.argsort(-scores)],
         scores[np.argsort(-scores)],
     )
-    notify_slack(word_to_score)
     print(word_to_score)
-    notify_slack(f"{sorted_words}, {sorted_scores}")
     print(f"{sorted_words}, {sorted_scores}")
-    notify_slack(f"{sorted_words[:50]}, {sorted_scores[:50]}")
     print(f"{sorted_words[:50]}, {sorted_scores[:50]}")
 
 
