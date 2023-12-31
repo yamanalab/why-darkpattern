@@ -1,6 +1,7 @@
 <div align="center">
 
-# Why is the User Interface a Dark Pattern? : Explainable Auto-Detection and its Analysis
+# Why is the User Interface a Dark Pattern? : <br /> Explainable Auto-Detection and its Analysis
+
 
 [Yuki Yada](https://www.yyada.jp/), Tsuneo Matsumoto, Fuyuko Kido, Hayato Yamana
 
