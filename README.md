@@ -1,6 +1,14 @@
+<div align="center">
+
 # Why is the User Interface a Dark Pattern? : Explainable Auto-Detection and its Analysis
 
 [Yuki Yada](https://www.yyada.jp/), Tsuneo Matsumoto, Fuyuko Kido, Hayato Yamana
+
+</div>
+
+This repository provides the text-based dataset and experimental code for the paper: **Why is the User Interface a Dark Pattern? : Explainable Auto-Detection and its Analysis**
+
+Accepted at **IEEE BigData 2023 (Poster)**
 
 ## Overview
 
@@ -8,7 +16,9 @@ Dark patterns are malicious user interface designs that lead users towards speci
 
 This research focused on the interpretable automatic detection of dark patterns, specifically on extracting the reasons why a user interface is determined to be a dark pattern.
 
-First, we constructed an automatic detection model for dark patterns using BERT, based on a dataset obtained from prior research for automatically detecting dark patterns on E-Commerce sites. Next, we applied LIME and SHAP, which are Post-Hoc interpretation methods for machine learning models, to extract words that influence the determination of a dark pattern.
+First, we constructed an automatic detection model for dark patterns using BERT, based on a dataset obtained from prior research for dark patterns auto detection on E-Commerce sites. Next, we applied LIME and SHAP, which are Post-Hoc interpretation methods for machine learning models, to extract words that influence the determination of a dark pattern.
+
+For more information, please check our paper. <!-- TODO: URL -->
 
 ## Setup
 
@@ -17,10 +27,36 @@ First, we constructed an automatic detection model for dark patterns using BERT,
 - python ^3.8
 - poetry 1.2.1
 
-You can setup project by running
+You can setup project by running:
 
 ```bash
 $ poetry install
+```
+
+Set PYTHONPATH to environment variable
+
+```bash
+$ export PYTHONPATH="$PYTHONPATH:$(pwd)"
+```
+
+## How to Run
+
+To train and evaluate dark pattern auto detection model, please run:
+
+```bash
+$ python experiments/train.py
+```
+
+You can execute lime-based interpretation of dark pattern auto detection model by:
+
+```bash
+$ python experiments/explain_by_lime.py
+```
+
+For shap:
+
+```bash
+$ python experiments/explain_by_shap.py
 ```
 
 ## Experimental Result
@@ -71,3 +107,7 @@ We applied SHAP to all dark pattern texts. We calculated the average score range
 | 23  |   $\text{less}$    | 0.384  |
 | 24  | $\text{withdraw}$  | 0.375  |
 | 25  | $\text{remaining}$ | 0.345  |
+
+## License
+
+- [Apache-2.0 license](https://github.com/yamanalab/why-darkpattern?tab=Apache-2.0-1-ov-file#readme)
