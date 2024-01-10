@@ -7,7 +7,7 @@
 
 </div>
 
-This repository provides the text-based dataset and experimental code for the paper: **Why is the User Interface a Dark Pattern? : Explainable Auto-Detection and its Analysis**
+This repository provides the text-based dataset and experimental code for the paper: [**Why is the User Interface a Dark Pattern? : Explainable Auto-Detection and its Analysis**](https://arxiv.org/abs/2401.04119)
 
 Accepted at **IEEE BigData 2023 (Poster)**
 
@@ -19,7 +19,7 @@ This research focused on the interpretable automatic detection of dark patterns,
 
 First, we constructed an automatic detection model for dark patterns using BERT, based on a dataset obtained from prior research for dark patterns auto detection on E-Commerce sites. Next, we applied LIME and SHAP, which are Post-Hoc interpretation methods for machine learning models, to extract words that influence the determination of a dark pattern.
 
-For more information, please check our paper. <!-- TODO: URL -->
+For more information, please check our [paper](https://arxiv.org/abs/2401.04119).
 
 ## Setup
 
